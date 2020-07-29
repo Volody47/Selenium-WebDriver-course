@@ -30,4 +30,4 @@ def test_open_admin_login(driver):
     button_login.click()
 
     # Expected value vs. Actual value
-    assert "My Storet" == driver.title, "User not login"
+    assert "My Store" == driver.title, "User not login"
