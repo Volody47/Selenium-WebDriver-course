@@ -21,6 +21,10 @@ def browser(request):
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox()
         browser.set_window_size(1366, 800)
+    elif browser_name == "Ie":
+        print("\nstart Ie browser for test..")
+        browser = webdriver.Ie()
+        browser.set_window_size(1366, 800)
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     request.addfinalizer(browser.quit)
