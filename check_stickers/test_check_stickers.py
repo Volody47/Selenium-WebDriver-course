@@ -13,10 +13,14 @@ class TestMainPage1():
 
         product_items = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".product a.link")))
-        stickers = WebDriverWait(browser, 5).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, "sticker")))
+        i = 0
+        for sticker in product_items:
+            sticker = product_items[i].find_elements_by_css_selector(".sticker")
+            count_item = []
+            count_item.append(i)
+            assert len(count_item) == len(sticker), "Should be just one sticker for each item"
+            i += 1
 
-        assert len(product_items) == len(stickers), "Should be just one sticker"
 
 
 
