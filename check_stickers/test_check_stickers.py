@@ -16,8 +16,8 @@ class TestMainPage1():
         i = 0
         for sticker in product_items:
             sticker = product_items[i].find_elements_by_css_selector(".sticker")
-            count_item = []
-            count_item.append(i)
+            # count_item = []
+            # count_item.append(i)
             assert len(sticker) == 1, "Should be just one sticker for each item"
             i += 1
 
