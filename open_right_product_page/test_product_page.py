@@ -49,8 +49,11 @@ class TestMainPage1():
             EC.presence_of_element_located((By.CSS_SELECTOR, "#box-campaigns .regular-price"))).value_of_css_property("color")
         regular_price_element_crossed_out = WebDriverWait(browser, 5).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "#box-campaigns .regular-price"))).get_attribute("tagName")
+        regular_price_main_page_size = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#box-campaigns .regular-price"))).value_of_css_property("font-size")
         # Create list
         regular_price_list_color = regular_price_main_page_color.replace("rgba(", "").replace(")", "").replace("rgb(", "").strip('][').split(', ')
+        regular_price_main_page_size_number = float(regular_price_main_page_size.replace("px", ""))
         # Verification
         assert regular_price_list_color[0:3] == regular_price_list_color[0:3], "Value of 'R', 'G', 'B' not same"
         assert regular_price_element_crossed_out == "S", "element not crossed out"
@@ -60,12 +63,17 @@ class TestMainPage1():
             EC.presence_of_element_located((By.CSS_SELECTOR, "#box-campaigns .campaign-price"))).value_of_css_property("color")
         campaign_price_element_strong = WebDriverWait(browser, 5).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "#box-campaigns .campaign-price"))).get_attribute("tagName")
+        campaign_price_main_page_size = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#box-campaigns .campaign-price"))).value_of_css_property("font-size")
         # Create list
         campaign_price_list_color = campaign_price_main_page_color.replace("rgba(", "").replace(")", "").replace("rgb(", "").strip('][').split(', ')
+        campaign_price_main_page_size_number = float(campaign_price_main_page_size.replace("px", ""))
         x = ['0', '0']
         # Verification
         assert campaign_price_list_color[1:3] == x, "Value of 'G', 'B' not 0"
         assert campaign_price_element_strong == "STRONG", "element not 'strong'"
+        # Verification element size
+        assert regular_price_main_page_size_number < campaign_price_main_page_size_number, "New price element should be bigger "
 
                                                     # Click on product
         product_item = WebDriverWait(browser, 5).until(
@@ -76,8 +84,11 @@ class TestMainPage1():
             EC.presence_of_element_located((By.CLASS_NAME, "regular-price"))).value_of_css_property("color")
         regular_price_element_crossed_out = WebDriverWait(browser, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "regular-price"))).get_attribute("tagName")
+        regular_price_product_page_size = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "regular-price"))).value_of_css_property("font-size")
         # Create list
         regular_price_list_color = regular_price_product_page_color.replace("rgba(", "").replace(")", "").replace("rgb(", "").strip('][').split(', ')
+        regular_price_product_page_size_number = float(regular_price_product_page_size.replace("px", ""))
         # Verification
         assert regular_price_list_color[0:3] == regular_price_list_color[0:3], "Value of 'R', 'G', 'B' not same"
         assert regular_price_element_crossed_out == "S", "element not crossed out"
@@ -87,12 +98,17 @@ class TestMainPage1():
             EC.presence_of_element_located((By.CLASS_NAME, "campaign-price"))).value_of_css_property("color")
         campaign_price_element_strong = WebDriverWait(browser, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "campaign-price"))).get_attribute("tagName")
+        campaign_price_product_page_size = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "campaign-price"))).value_of_css_property("font-size")
         # Create list
         campaign_price_list_color = campaign_price_product_page_color.replace("rgba(", "").replace(")", "").replace("rgb(", "").strip('][').split(', ')
+        campaign_price_product_page_size_number = float(campaign_price_product_page_size.replace("px", ""))
         x = ['0', '0']
         # Verification
         assert campaign_price_list_color[1:3] == x, "Value of 'G', 'B' not 0"
         assert campaign_price_element_strong == "STRONG", "element not 'strong'"
+        # Verification element size
+        assert regular_price_product_page_size_number < campaign_price_product_page_size_number, "New price element should be bigger "
 
 
 
